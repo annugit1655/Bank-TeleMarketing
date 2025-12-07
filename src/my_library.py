@@ -8,7 +8,7 @@ def make_inital_imports():
     import matplotlib.ticker as ticker
     import seaborn as sns
     
-    return pd, np, stats, plt, ticker
+    return pd, np, stats, plt, ticker, sns
 
 # helper function to load a dataset
 def load_data(url):
