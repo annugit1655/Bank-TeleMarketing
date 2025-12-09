@@ -3,12 +3,12 @@
 def make_inital_imports():
     import pandas as pd
     import numpy as np
-    import scipy.stats as stats
+    #import scipy.stats as stats
     import matplotlib.pyplot as plt
-    import matplotlib.ticker as ticker
+    #import matplotlib.ticker as ticker
     import seaborn as sns
     
-    return pd, np, stats, plt, ticker, sns
+    return pd, np, plt, sns
 
 # helper function to load a dataset
 def load_data(url):

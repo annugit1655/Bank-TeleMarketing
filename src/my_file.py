@@ -1,6 +1,7 @@
 import src.my_library as my_library
 
-pd, np, plt, ticker, sns = my_library.make_inital_imports()
+pd, np, plt, sns = my_library.make_inital_imports()
+
 
 def feature_analysis(df_, feature_name, feature_type, num_gr=10):
     # Check if feature exists
@@ -37,7 +38,7 @@ def feature_analysis(df_, feature_name, feature_type, num_gr=10):
             
             # Distribution
             plot_distribution(df_ = df_, feature_name = feature_name, feature_type = feature_type,
-                              plot_options = {'fig', fig, 'ax': ax[0]})
+                              plot_options = {'fig': fig, 'ax': ax[0]})
             ax[0].set_title(f"{feature_name} Distribution", fontsize=15, fontweight='bold', pad=20)
             # Yes Proportion
             plot_yes_proportion(df_ = df_, feature_name = feature_name, feature_type = feature_type,
