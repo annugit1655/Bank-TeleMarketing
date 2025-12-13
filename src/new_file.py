@@ -1,7 +1,6 @@
 import src.my_library as my_library
 
-
-pd, np, plt, sns = my_library.make_initial_imports()
+pd, np, plt, sns = my_library.make_inital_imports()
 
 
 
