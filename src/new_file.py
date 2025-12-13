@@ -1,7 +1,7 @@
 import src.my_library as my_library
 
 
-pd, np, plt, sns, _ = my_library.make_initial_imports()
+pd, np, plt, sns, = my_library.make_initial_imports()
 
 
 def analyse_feature(df_, feature_name, feature_type, num_gr=10):
