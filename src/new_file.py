@@ -202,7 +202,7 @@ def plot_yes_proportion_by(by=None, df_=None, feature_name=None, fig=None, ax=No
         
         if by == 'year':
 
-            yes_proportion_by_year = df_.groupby([feature_name, 'year'])['y'].mean().unstack()
+            yes_proportion_by_year = df_.groupby([feature_name, 'year'])['y_binary'].mean().unstack()
 
             if feature_name == 'month':
                 order = months_order
@@ -222,7 +222,7 @@ def plot_yes_proportion_by(by=None, df_=None, feature_name=None, fig=None, ax=No
 
         elif by == 'month':
                      
-            yes_proportion_by_month = df_.groupby([feature_name, 'month'])['y'].mean().unstack()
+            yes_proportion_by_month = df_.groupby([feature_name, 'month'])['y_binary'].mean().unstack()
             
             if feature_name == 'month':
                 order = months_order
@@ -249,7 +249,7 @@ def plot_yes_proportion_by(by=None, df_=None, feature_name=None, fig=None, ax=No
         # ONLY FOR NUMERIC FEATURES
         elif by == 'month and year':
             
-            yes_proportion_by_month_and_year = df_.groupby(['month', 'year'])['y'].mean().unstack()
+            yes_proportion_by_month_and_year = df_.groupby(['month', 'year'])['y_binary'].mean().unstack()
             
             order = months_order
             yes_proportion_by_month_and_year = yes_proportion_by_month_and_year.reindex(labels=order)
