@@ -5,54 +5,48 @@ pd, np, plt, sns = my_library.make_inital_imports()
 
 def feature_analysis(df_, feature_name, feature_type, num_gr=10):
     # Check if feature exists
-    if feature_name not in df_.columns:
-        print(f"Error : {feature_name} is not found in DataFrame columns.")
-        return None
+    #if feature_name not in df_.columns:
+     #   print(f"Error : {feature_name} is not found in DataFrame columns.")
+      #  return None
 
-    try:
-        if feature_type == 'categorical':
-            # Two subplots: distribution + yes proportion
-            fig, ax = plt.subplots(2, 1, 
-                                   figsize=(15, 10),
-                                   gridspec_kw = {'height_ratios': [3, 2]}, 
-                                   sharey = True)
-            
-            # Distribution
-            plot_distribution(df_= df_, feature_name = feature_name, feature_type = feature_type, 
-                              plot_options={'fig': fig, 'ax': ax[0]})
-            ax[0].set_title(f"{feature_name} Distribution",
-            fontsize=15, fontweight='bold', pad=20)
-            # Yes Proportion
-            plot_yes_proportion(df_ = df_, feature_name = feature_name, feature_type = feature_type,
-                                plot_options = {'fig': fig, 'ax': ax[1]})
-            
-            plt.tight_layout()
-            return fig
-        
-        elif feature_type == 'numeric':
-            # Two subplots: distribution + yes proportion(with grouping)
-            fig, ax = plt.subplots(2, 1,
-                                   figsize=(15, 10),
-                                   gridspec_kw = {'height_ratios':[3,0.5]},
-                                   sharey=True)
-            
-            # Distribution
-            plot_distribution(df_ = df_, feature_name = feature_name, feature_type = feature_type,
-                              plot_options = {'fig': fig, 'ax': ax[0]})
-            ax[0].set_title(f"{feature_name} Distribution", fontsize=15, fontweight='bold', pad=20)
-            # Yes Proportion
-            plot_yes_proportion(df_ = df_, feature_name = feature_name, feature_type = feature_type,
-                                plot_options = {'fig': fig, 'ax': ax[1]})
-            
-            plt.tight_layout()
-            return fig
-        else:
-            print(f"Error: feature_type `{feature_type}` must be either 'categorical' or 'numeric'.")
-
-    except Exception as e:
-        print(f"An error occured while analysing `{feature_name}` : {e}")
-        return None
     
+    if feature_type == 'categorical':
+        # Two subplots: distribution + yes proportion
+        fig, ax = plt.subplots(2, 1, 
+                                figsize=(15, 10),
+                                gridspec_kw = {'height_ratios': [3, 2]}, 
+                                sharex = True)
+        
+        # Distribution
+        plot_distribution(df_= df_, feature_name = feature_name, feature_type = feature_type, 
+                            plot_options={'fig': fig, 'ax': ax[0]})
+        ax[0].set_title(f"{feature_name} Distribution",
+        fontsize=15, fontweight='bold', pad=20)
+        # Yes Proportion
+        plot_yes_proportion(df_ = df_, feature_name = feature_name, feature_type = feature_type,
+                            plot_options = {'fig': fig, 'ax': ax[1]})
+        
+        plt.tight_layout()
+        
+    
+    elif feature_type == 'numeric':
+        # Two subplots: distribution + yes proportion(with grouping)
+        fig, ax = plt.subplots(2, 1,
+                                figsize=(15, 10),
+                                gridspec_kw = {'height_ratios':[3,0.5]},
+                                sharex=True)
+        
+        # Distribution
+        plot_distribution(df_ = df_, feature_name = feature_name, feature_type = feature_type,
+                            plot_options = {'fig': fig, 'ax': ax[0]})
+        ax[0].set_title(f"{feature_name} Distribution", fontsize=15, fontweight='bold', pad=20)
+        # Yes Proportion
+        plot_yes_proportion(df_ = df_, feature_name = feature_name, feature_type = feature_type,
+                            plot_options = {'fig': fig, 'ax': ax[1]})
+        
+        plt.tight_layout()
+            
+        
 def print_error_msg(msg, title="ERROR"):
     print("=" * 40)
     print(f"{title}:")
