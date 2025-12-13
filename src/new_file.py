@@ -378,14 +378,14 @@ def plot_yes_proportion(df_=None, feature_name=None, feature_type=None, num_gr=1
                                           ordered=True)
 
         sns.barplot(x=df_[feature_name], 
-                    y=df_['y'],
+                    y=df_['y_binary'],
                     order=custom_order,
                     ci=95,
                     errwidth=2,
                     ax=ax);
 
         # Bar labels
-        df_yes_proba = pd.crosstab(df_[feature_name], df_['y'])
+        df_yes_proba = pd.crosstab(df_[feature_name], df_['y_binary'])
         df_yes_proba = (df_yes_proba[1] / (df_yes_proba[0] + df_yes_proba[1])).reindex(custom_order)
 
         coors_x = np.arange(0, df_yes_proba.shape[0])
@@ -421,10 +421,10 @@ def plot_yes_proportion(df_=None, feature_name=None, feature_type=None, num_gr=1
         bins_series = pd.cut(df_[feature_name], bins=bins, include_lowest=True)
         bins_series.name = f'{feature_name}_bins'
         
-        df_bins_yes = pd.DataFrame(pd.concat([df_[feature_name], bins_series, df_['y']], axis=1))
+        df_bins_yes = pd.DataFrame(pd.concat([df_[feature_name], bins_series, df_['y_binary']], axis=1))
 
-        yes_answers = df_bins_yes.groupby(bins_series.name)['y'].agg(lambda y: y.eq(1).sum())
-        bin_observations = df_bins_yes.groupby(bins_series.name)['y'].count()
+        yes_answers = df_bins_yes.groupby(bins_series.name)['y_binary'].agg(lambda y: y.eq(1).sum())
+        bin_observations = df_bins_yes.groupby(bins_series.name)['y_binary'].count()
 
         # Getting the probabilities to say `yes` for each bin
         df_yes_proba = yes_answers / bin_observations
@@ -434,7 +434,7 @@ def plot_yes_proportion(df_=None, feature_name=None, feature_type=None, num_gr=1
 
         # Graph those probabilities
         sns.barplot(x=df_bins_yes[f'{feature_name}_bins'], 
-                    y=df_bins_yes['y'],
+                    y=df_bins_yes['y_binary'],
                     ci=95,
                     color='b',
                     errwidth=2,
@@ -450,7 +450,7 @@ def plot_yes_proportion(df_=None, feature_name=None, feature_type=None, num_gr=1
         ax.set_title('YES-proportion', fontsize=16, pad=20)
         ax.set_ylabel('Proportion')
         
-        abs_values = df_bins_yes.groupby(bins_series.name)['y'].count()
+        abs_values = df_bins_yes.groupby(bins_series.name)['y_binary'].count()
         rel_values = []
         for i in (abs_values / df_.shape[0] * 100):
             if i >= 0.5:
