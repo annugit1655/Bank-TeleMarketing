@@ -33,7 +33,7 @@ def feature_analysis(df_, feature_name, feature_type, num_gr=10):
             # Two subplots: distribution + yes proportion(with grouping)
             fig, ax = plt.subplots(2, 1,
                                    figsize=(15, 10),
-                                   gridspec_kw = {'height_ratios':[3,2]},
+                                   gridspec_kw = {'height_ratios':[3,0.5]},
                                    sharey=True)
             
             # Distribution
@@ -374,7 +374,7 @@ def plot_distribution(df_=None, feature_name=None, feature_type=None, num_gr=10,
 
     elif feature_type == 'numeric':
         # Set up the figure and axes
-        if 'fig' not in plot_options.keys() and 'ax' not in plot_options.keys():
+        if 'fig' not in plot_options.keys():
             fig, ax = plt.subplots(2, 1,
                                      figsize=(15, 4),
                                      gridspec_kw={'height_ratios': [3, 0.5]},
@@ -420,7 +420,7 @@ def plot_distribution(df_=None, feature_name=None, feature_type=None, num_gr=10,
             plt.tight_layout()
 
     else:
-        print('plot_distribution(): Only `categorical` and `numeric` are acceptable.')
+        print_error_msg('plot_distribution(): Only `categorical` and `numeric` are acceptable.')
         fig.delaxes(ax)
         return
 
@@ -529,6 +529,6 @@ def plot_yes_proportion(df_=None, feature_name=None, feature_type=None, num_gr=1
             plt.tight_layout()
 
     else:
-        print('plot_yes_proportion(): Only `categorical` and `numeric` are acceptable.')
+        print_error_msg('plot_yes_proportion(): Only `categorical` and `numeric` are acceptable.')
         fig.delaxes(ax)
         return
