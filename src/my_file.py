@@ -374,19 +374,19 @@ def plot_distribution(df_=None, feature_name=None, feature_type=None, num_gr=10,
 
     elif feature_type == 'numeric':
         # Set up the figure and axes
-        if 'fig' not in plot_options.keys() and 'axes' not in plot_options.keys():
-            fig, axes = plt.subplots(2, 1,
+        if 'fig' not in plot_options.keys() and 'ax' not in plot_options.keys():
+            fig, ax = plt.subplots(2, 1,
                                      figsize=(15, 4),
                                      gridspec_kw={'height_ratios': [3, 0.5]},
                                      sharex=True)
         else:
             fig = plot_options['fig']
-            axes = plot_options['axes']
+            ax = plot_options['ax']
 
         # Plot the histogram and KDE
-        axes[0].set_title(f'`{feature_name}` distribution', fontsize=16, pad=20)
-        sns.histplot(df_[feature_name], stat='density', lw=0, ax=axes[0])
-        sns.kdeplot(df_[feature_name], color='#ffb500', lw=3, ax=axes[0])
+        ax[0].set_title(f'`{feature_name}` distribution', fontsize=16, pad=20)
+        sns.histplot(df_[feature_name], stat='density', lw=0, ax=ax[0])
+        sns.kdeplot(df_[feature_name], color='#ffb500', lw=3, ax=ax[0])
 
         # Plot feature statistics
         _, mean_val, _, min_val, q25, q50, q75, max_val = np.round(df_[feature_name].describe(), 2)
@@ -394,8 +394,8 @@ def plot_distribution(df_=None, feature_name=None, feature_type=None, num_gr=10,
         feature_stats_text = (f'min: {min_val}\n' + f'q25: {q25}\n' + f'q50: {q50}\n' +
                             f'q75: {q75}\n' + f'max: {max_val}\n' + f'mean: {mean_val}')
 
-        x_coor = np.quantile(axes[0].get_xlim(), 0.85)
-        y_coor = np.quantile(axes[0].get_ylim(), 0.2)
+        x_coor = np.quantile(ax[0].get_xlim(), 0.85)
+        y_coor = np.quantile(ax[0].get_ylim(), 0.2)
 
         font = {
             'color': 'black',
@@ -409,10 +409,10 @@ def plot_distribution(df_=None, feature_name=None, feature_type=None, num_gr=10,
             'boxstyle': 'round'
         }
 
-        axes[0].text(x_coor, y_coor, feature_stats_text, fontdict=font, bbox=box)
+        ax[0].text(x_coor, y_coor, feature_stats_text, fontdict=font, bbox=box)
 
         # Plot the boxplot
-        sns.boxplot(x=df_[feature_name], ax=axes[1])
+        sns.boxplot(x=df_[feature_name], ax=ax[1])
 
         plt.tight_layout()
 
@@ -459,7 +459,7 @@ def plot_yes_proportion(df_=None, feature_name=None, feature_type=None, num_gr=1
 
         coors_x = np.arange(0, df_yes_proba.shape[0])
         for i in range(df_yes_proba.shape[0]):
-            plt.annotate(f"{df_yes_proba[i]:.2f}", xy=(coors_x[i]-0.2, df_yes_proba[i]), ha='center', va='bottom')
+            ax.annotate(f"{df_yes_proba[i]:.2f}", xy=(coors_x[i]-0.2, df_yes_proba[i]), ha='center', va='bottom')
 
         # Set titles and labels
         ax.set_title('YES-proportion', fontsize=16, pad=20)
@@ -500,7 +500,7 @@ def plot_yes_proportion(df_=None, feature_name=None, feature_type=None, num_gr=1
 
         coors_x = np.arange(0, df_yes_proba['mean'].shape[0])
         for i in range(df_yes_proba['mean'].shape[0]):
-            plt.annotate(f'{df_yes_proba["mean"][i]:.2f}', xy=(coors_x[i]-0.2, df_yes_proba['mean'][i]), ha='center', va='bottom')
+            ax.annotate(f'{df_yes_proba["mean"][i]:.2f}', xy=(coors_x[i]-0.2, df_yes_proba['mean'][i]), ha='center', va='bottom')
 
         # Set titles and labels
         ax.set_title('YES-proportion', fontsize=16, pad=20)
