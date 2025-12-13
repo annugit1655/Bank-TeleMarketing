@@ -12,7 +12,7 @@ def feature_analysis(df_, feature_name, feature_type, num_gr=10):
     try:
         if feature_type == 'categorical':
             # Two subplots: distribution + yes proportion
-            fig, ax = plt.subplots(1, 2, 
+            fig, ax = plt.subplots(2, 1, 
                                    figsize=(15, 10),
                                    gridspec_kw = {'height_ratios': [3, 2]}, 
                                    sharey = True)
@@ -31,7 +31,7 @@ def feature_analysis(df_, feature_name, feature_type, num_gr=10):
         
         elif feature_type == 'numeric':
             # Two subplots: distribution + yes proportion(with grouping)
-            fig, ax = plt.subplots(1, 2,
+            fig, ax = plt.subplots(2, 1,
                                    figsize=(15, 10),
                                    gridspec_kw = {'height_ratios':[3,2]},
                                    sharey=True)
