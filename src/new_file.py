@@ -190,6 +190,7 @@ def plot_yes_proportion_by(by=None, df_=None, feature_name=None, fig=None, ax=No
     if error_handling('plot_yes_proportion_by', by, df_, feature_name, fig, ax) == -1:
         return
     
+    df_['y_binary'] = pd.to_numeric(df_['y_binary'], errors='coerce')
     months_order = pd.Categorical(['mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
                                   ordered=True)
     
@@ -209,7 +210,7 @@ def plot_yes_proportion_by(by=None, df_=None, feature_name=None, fig=None, ax=No
             else:
                 order = pd.Categorical(df_[feature_name].value_counts().index, ordered=True)
 
-            yes_proportion_by_year = yes_proportion_by_year.reindex(labels=order)
+            yes_proportion_by_year = yes_proportion_by_year.reindex(index=order)
             
             annot = np.round(yes_proportion_by_year, 2)
 
@@ -232,7 +233,7 @@ def plot_yes_proportion_by(by=None, df_=None, feature_name=None, fig=None, ax=No
             lbls_order = order
             cols_order = months_order
             
-            yes_proportion_by_month = yes_proportion_by_month.reindex(labels=lbls_order, 
+            yes_proportion_by_month = yes_proportion_by_month.reindex(index=lbls_order, 
                                                                       columns=cols_order)
             
             annot = np.round(yes_proportion_by_month, 2)
@@ -252,7 +253,7 @@ def plot_yes_proportion_by(by=None, df_=None, feature_name=None, fig=None, ax=No
             yes_proportion_by_month_and_year = df_.groupby(['month', 'year'])['y_binary'].mean().unstack()
             
             order = months_order
-            yes_proportion_by_month_and_year = yes_proportion_by_month_and_year.reindex(labels=order)
+            yes_proportion_by_month_and_year = yes_proportion_by_month_and_year.reindex(index=months_order)
 
             if df_[feature_name].dtype == 'float':
                 cmap = sns.color_palette('coolwarm', as_cmap=True)
@@ -422,6 +423,7 @@ def plot_yes_proportion(df_=None, feature_name=None, feature_type=None, num_gr=1
         bins_series.name = f'{feature_name}_bins'
         
         df_bins_yes = pd.DataFrame(pd.concat([df_[feature_name], bins_series, df_['y_binary']], axis=1))
+        df_bins_yes['y_binary'] = pd.to_numeric(df_bins_yes['y_binary'], errors='coerce')  # ensure numeric
 
         yes_answers = df_bins_yes.groupby(bins_series.name)['y_binary'].agg(lambda y: y.eq(1).sum())
         bin_observations = df_bins_yes.groupby(bins_series.name)['y_binary'].count()
@@ -433,12 +435,12 @@ def plot_yes_proportion(df_=None, feature_name=None, feature_type=None, num_gr=1
         df_yes_proba = pd.DataFrame(df_yes_proba)
 
         # Graph those probabilities
-        sns.barplot(x=df_bins_yes[f'{feature_name}_bins'], 
-                    y=df_bins_yes['y_binary'],
+        sns.barplot(x=df_bins_yes.index,    #[f'{feature_name}_bins'], 
+                    y=df_bins_yes.values,            #['y_binary'],
                     ci=95,
                     color='b',
                     errwidth=2,
-                    ax=ax);
+                    ax=ax)
 
         coors_x = np.arange(0, df_yes_proba['mean'].shape[0])
         for i in range(df_yes_proba['mean'].shape[0]):
