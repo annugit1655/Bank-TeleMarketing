@@ -1,0 +1,8 @@
+|              |   y_binary |
+|:-------------|-----------:|
+| duration     |   0.405274 |
+| previous     |   0.230181 |
+| emp_var_rate |  -0.298334 |
+| euribor3m    |  -0.307771 |
+| pdays        |  -0.324914 |
+| nr_employed  |  -0.354678 |
