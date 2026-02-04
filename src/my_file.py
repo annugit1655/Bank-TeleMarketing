@@ -96,4 +96,5 @@ def plot_numeric_distribution(df, feature_var, fig=None, ax=None):
     sns.boxplot(data = df, x =feature_var, ax=ax[1])
     
     plt.tight_layout()
+    
 
