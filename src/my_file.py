@@ -78,9 +78,9 @@ def plot_numeric_yes_proportion(df, feature_var, num_grp, ax=None, fig=None):
     return df_yes_prob, fig, ax
 
 
-def plot_numeric_distribution(df, feature_var, fig=None, ax=None):
-    if fig is None or ax is None:
-        fig, ax = plt.subplots(2, 1, figsize=(15, 3), gridspec_kw={'height_ratios':[3, 0.5]}, sharex=True)
+def plot_numeric_distribution(df, feature_var):
+    
+    fig, ax = plt.subplots(2, 1, figsize=(15, 3), gridspec_kw={'height_ratios':[3, 0.5]}, sharex=True)
     sns.histplot(df[feature_var], stat='density', kde=True, lw=0, ax=ax[0]);
     sns.kdeplot(df[feature_var], color='#ffb500', lw=3, ax=ax[0]);
 
@@ -96,5 +96,5 @@ def plot_numeric_distribution(df, feature_var, fig=None, ax=None):
     sns.boxplot(data = df, x =feature_var, ax=ax[1])
     
     plt.tight_layout()
-    
+
 
