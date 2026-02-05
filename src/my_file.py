@@ -59,6 +59,7 @@ def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10
     # Titles and labels 
     ax.set_title(f"{feature_var.capitalize()} YES-proportion", fontsize=16, fontweight='bold', y=1.02) 
     ax.set_ylabel("Proportion")
+    ax.set_xlabel(f"{feature_var}_bins")
 
     # Absoulute and relative counts
     abs_values = df_bins.groupby(['bin'])[ycol].count()
