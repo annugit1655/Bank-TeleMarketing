@@ -2,7 +2,7 @@ import src.my_library as my_library
 
 pd, np, plt, sns = my_library.make_inital_imports()
 
-def plot_numeric_yes_proportion(df, feature_var, num_grp, ax=None, fig=None):
+def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10, widths=float, ax=None, fig=None):
     """"
     Splits the numeric features into bins and 
     computes the probability of 'yes' (y_binary == 1) in each bin.
@@ -41,28 +41,27 @@ def plot_numeric_yes_proportion(df, feature_var, num_grp, ax=None, fig=None):
     df_bins = df.assign(bin=bins_series)
 
     # Compute total counts and yes responses per bin
-    yes_count = df_bins.groupby("bin")['y'].apply(lambda y : (y=="yes").sum())
-    total_count = df_bins.groupby("bin")['y'].count()
+    yes_count = df_bins.groupby("bin")[ycol].apply(lambda y : (y==1).sum())
+    total_count = df_bins.groupby("bin")[ycol].count()
 
     # Probability of "yes" per bin
     df_yes_prob = (yes_count / total_count).to_frame(name="mean").reset_index()
 
     # Plot
     if fig is None or ax is None:
-        fig, ax = plt.subplots(figsize=(15, 4), gridspec_kw={'height_ratios':[3, 0.5]})
-    sns.barplot(x=df_bins['bin'], y=df_bins['y_binary'],
-                 color='skyblue', ci=95, errwidth=2, ax=ax)
-
+        fig, ax = plt.subplots(figsize=(15, 4))
+    sns.barplot(x='bin', y='mean',data=df_yes_prob,
+                 color='skyblue', ci=None, width=widths, ax=ax)
     # Annotate probablitites above bar
     for i, row in df_yes_prob.iterrows():
-        ax.text(i-0.09, row['mean']+0.02, f"{row['mean']:.2f}", ha='center', va='bottom', fontsize=10, color='k')
+        ax.text(i, row['mean']+0.02, f"{row['mean']:.2f}", ha='center', va='bottom', fontsize=10, color='k')
 
     # Titles and labels 
     ax.set_title(f"{feature_var.capitalize()} YES-proportion", fontsize=16, fontweight='bold', y=1.02) 
     ax.set_ylabel("Proportion")
 
     # Absoulute and relative counts
-    abs_values = df_bins.groupby(['bin'])['y'].count()
+    abs_values = df_bins.groupby(['bin'])[ycol].count()
     rel_values = [(f"{i:.0f}" if i >= 0.5 else "<0.5") for i in (abs_values / df.shape[0] * 100)]
     
     # Format x-axis
