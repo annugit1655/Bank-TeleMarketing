@@ -273,3 +273,35 @@ def plot_odd_ratio_table(data, feature_var, target_var, baseline):
     plt.tight_layout()
     plt.subplots_adjust(wspace=0.3, hspace=0.3)
     plt.show()
+
+
+def plot_numeric_heatmap_bivariate_analysis(df=None, month_var=None, year_var=None, feature_var=None, display_name=None, fig=None, ax=None):
+    """Plot numeric variables median value for seasonal trend with overall and yes-proportion data"""  
+
+    # Overall data
+    total_df = pd.crosstab(
+        df[month_var], df[year_var],
+        df[feature_var], aggfunc='median'
+    )
+    
+    # yes-proportion data
+    new_df = df[df['y']=='yes']
+    yes_df = pd.crosstab(
+        new_df[month_var], new_df[year_var],
+        new_df[feature_var], aggfunc='median'
+    )
+    # Visualization
+    if fig is None or ax is None:
+        fig, ax = plt.subplots(1,2, figsize=(15, 5))
+    sns.heatmap(total_df, annot=True, fmt='.2f', cmap='Blues', cbar=True, ax = ax[0])
+    ax[0].set_yticklabels(ax[0].get_yticklabels(), rotation=25)
+    ax[0].set_title(f"Overall median '{feature_var}' by {display_name.capitalize()} and {year_var.capitalize()}", fontsize=14,fontweight='bold', y=1.02)
+
+    sns.heatmap(yes_df, annot=True, fmt='.2f', cmap='Blues', cbar=True, ax = ax[1])
+    ax[1].set_yticklabels(ax[0].get_yticklabels(), rotation=25)
+    ax[1].set_title(f"YES-proportion median '{feature_var}' by {display_name.capitalize()} and {year_var.capitalize()}", fontsize=14, fontweight='bold', y=1.02)
+
+    
+    plt.show()
+
+    return fig, ax
