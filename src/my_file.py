@@ -2,6 +2,8 @@ import src.my_library as my_library
 
 pd, np, plt, sns = my_library.make_inital_imports()
 
+from scipy.stats import stats
+
 def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10, widths=float, ax=None, fig=None):
     """"
     Splits the numeric features into bins and 
@@ -141,3 +143,133 @@ def plot_univariate_analysis_categorical_var(df=None, categorical_var=None, ycol
 
     return total_counts, fig
 
+
+# Bivariate Analysis with Heatmaps
+def plot_heatmap_bivariate_analysis(df=None, feature_var=None, seasonal_var=None, y_binary=None, fig=None, ax=None):
+    """Plot heatmap for total observed and yes counts for given variables."""
+    # order for reindex
+    values_count = df[feature_var].value_counts()
+    # Total counts
+    total_counts = pd.crosstab(df[feature_var], df[seasonal_var], values=df[y_binary], aggfunc='count').reindex(index=values_count.index)
+    # Yes counts
+    yes_counts = pd.crosstab(df[feature_var], df[seasonal_var], values=df[y_binary], aggfunc='mean').round(2).reindex(index=values_count.index)
+
+    # Plot heatmap
+    if fig is None or ax is None:
+        fig, ax = plt.subplots(1, 2, figsize=(15, 5))
+    
+    # Total observed heatmap
+    scatter = sns.heatmap(total_counts, annot=True, fmt='.0f', cmap='Blues', cbar=True, ax=ax[0])
+    colorbar = scatter.collections[0].colorbar
+    colorbar.set_ticks([])
+    ax[0].set_title(f'Total Observed Counts by\n{feature_var.capitalize()} and {seasonal_var}', fontsize=14, fontweight='bold', y=1.04)
+    ax[0].tick_params(axis='y', rotation=25)
+    ax[0].set_ylabel('')
+    ax[0].set_xlabel('')
+
+    # yes counts heamap
+    heat_map = sns.heatmap(yes_counts, annot=True, fmt='.2f', cmap='Blues', cbar=True, ax=ax[1])
+    colorbar = heat_map.collections[0].colorbar
+    colorbar.set_ticks([])
+    ax[1].set_title(f'Conversion Rate by\n{feature_var.capitalize()} and {seasonal_var}', fontsize=14, fontweight='bold', y=1.04)
+    ax[1].tick_params(axis='y', rotation=25)
+    ax[1].set_ylabel('')
+    ax[1].set_xlabel('')
+
+    plt.tight_layout()
+    plt.subplots_adjust(wspace=0.3, hspace=0.3)
+
+    return fig, ax
+
+
+# Cumulative proportion of total contact and yes responses
+def plot_cumsum_total_yes_response(df=None, feature_var=None, cumsum_total_var=None, cumsum_yes_var=None, fig=None, ax=None):
+    if fig is None or ax is None:
+        fig, ax = plt.subplots(1, 2, figsize=(14,6))
+    new_df = df.reset_index()
+
+    # Left: Cumulative contribution of total contact
+    ax[0].plot(new_df[feature_var], new_df[cumsum_total_var], marker='o', color="skyblue")
+    ax[0].set_title("Cumulative Sum of Total Contacts", fontsize=14, fontweight='bold', y=1.05)
+    ax[0].set_ylabel("Cumulative Proportion of Total")
+    ax[0].tick_params(axis="x", rotation=45)
+
+
+    # Right: Cumulative contribution of yes responses
+    ax[1].plot(new_df[feature_var], new_df[cumsum_yes_var], marker="o", color="orange")
+    ax[1].set_title("Cumulative Contribution of Yes Responses", fontsize=14, fontweight='bold', y=1.05)
+    ax[1].set_ylabel("Cumulative Proportion of Yes")
+    ax[1].tick_params(axis="x", rotation=45)
+
+    for i, row in new_df.iterrows():
+        ax[0].text(row[feature_var], row[cumsum_total_var]*1.01,
+                    f"{row[cumsum_total_var]:.2f}%", ha='center', va='bottom', color='k', fontsize=10)
+        ax[1].text(row[feature_var], row[cumsum_yes_var]*1.01,
+                    f"{row[cumsum_yes_var]:.2f}%", ha='center', va='bottom', color='k', fontsize=10)
+
+    plt.tight_layout()
+    plt.subplots_adjust(wspace=0.3, hspace=0.3)
+    plt.show()
+
+
+# Statistical test for relationship between categorical variables and y(term deposit)
+def chi_square_categorical_y(data, feature_var, target_var):
+    # Contingency table
+    table = pd.crosstab(data[feature_var], data[target_var])
+
+    # Chi-square test
+    chi2, p, dof, expected = stats.chi2_contingency(table)
+
+    # Compute Cramér's V
+    n = table.sum().sum()
+    k = min(table.shape)
+    cramers_v = np.sqrt(chi2 / (n * (k - 1)))
+    significance = 'small' if cramers_v < 0.1 else 'medium' if cramers_v < 0.3 else 'large' if cramers_v < 0.5 else 'very large'
+    df = pd.DataFrame(
+        [chi2, p, cramers_v, significance], index=['Chi-square', 'pvalue', 'cramers_v', 'effect_size'], columns=['statistical_values'])
+
+    df = df.round(4)
+    return df
+
+
+def plot_odd_ratio_table(data, feature_var, target_var, baseline):
+    """Compute odd ratios for categories of a given feature relative to a baseline."""
+
+    # Contingency table
+    table = pd.crosstab(data[feature_var], data[target_var])
+
+    # Compute odds for each job
+    table["odds"] = table["yes"] / table["no"]
+
+    # Choose baseline
+    if baseline is None:
+        baseline = table.index[0]
+    baseline_odds = table.loc[baseline, "odds"]
+
+    # Compute odds ratio relative to baseline
+    table[f"odds_ratio_vs_{baseline}"] = table["odds"] / baseline_odds
+
+    # Create side-by-side figure
+    fig, ax = plt.subplots(1, 2, figsize=(16,6))
+
+    # Left side: table displayed as text
+    ax[0].axis("off")  # hide axes
+    table_display = table[["yes", "no", "odds", f"odds_ratio_vs_{baseline}"]]
+    ax[0].table(cellText=table_display.round(2).values,
+                rowLabels=table_display.index,
+                colLabels=table_display.columns,
+                loc="center")
+
+    ax[0].set_title(f"Odds Ratio Table (vs {baseline})")
+
+    # Right side: bar plot of odds ratios
+    ax[1].bar(table.index, table[f"odds_ratio_vs_{baseline}"], color="skyblue")
+    ax[1].axhline(1.0, color="red", linestyle="--", label=f"Baseline ({baseline})")
+    ax[1].set_ylabel(f"Odds Ratio vs {baseline.capitalize()}")
+    ax[1].set_title(f"Odds Ratios of YES-answers by {feature_var} Category")
+    ax[1].tick_params(axis="x", rotation=45)
+    ax[1].legend()
+
+    plt.tight_layout()
+    plt.subplots_adjust(wspace=0.3, hspace=0.3)
+    plt.show()
