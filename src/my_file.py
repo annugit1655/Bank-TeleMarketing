@@ -100,3 +100,44 @@ def plot_numeric_distribution(df, feature_var, fig=None, ax=None):
     return fig, ax
 
 
+# Univariate analysis function for categorical variables with bar plots
+def plot_univariate_analysis_categorical_var(df=None, categorical_var=None, ycol=None, display_name=None):
+    """Compute total count of customers contacted and percentage of customers who subscribed to a term deposit."""
+    # Count of campaign for each category
+    total_counts = df.groupby([categorical_var])[ycol].value_counts().unstack().fillna(0)   
+    total_counts['total'] = total_counts.sum(axis='columns')
+    total_counts = total_counts.sort_values(by='total', ascending=False)
+    total_counts['conversion_rate'] = (total_counts['yes'] / total_counts['total']).round(2)
+    total_counts = total_counts.assign(
+        cumsum_total_proportion = lambda x: (x['total'].cumsum() / x['total'].sum())*100,
+        cumsum_yes_proportion = lambda x: (x['yes'].cumsum() / x['yes'].sum())*100
+    )
+    
+    # Visualization
+    fig, ax = plt.subplots(2, 1, sharex=True,figsize=(15, 8), dpi=100)
+    colors = [(0.3, 0.8, 1), (0.6, 0.6, 1), '#0000FF']
+    # plot for total campaigns
+    x_pos = range(len(total_counts.index))
+    ax[0].bar(x_pos, total_counts['total'], color=colors)
+    ax[0].set_xticks(x_pos)
+    ax[0].set_xticklabels(total_counts.index)
+    ax[0].set_ylabel("Count")
+    ax[0].set_title(display_name + ' Distribution', fontsize=14, fontweight='bold', y=1.04)
+    for i, v in enumerate(total_counts['total']):
+        ax[0].text(i, v + 200, f"{int(v)} ({(v/(total_counts['total'].sum(axis=0))):.0%})", ha='center', fontsize=10)
+
+    # plot for successful subscriptions
+    ax[1].bar(x_pos, total_counts['conversion_rate'], color=colors)
+    ax[1].set_xticks(x_pos)
+    ax[1].set_xticklabels(total_counts.index)
+    ax[1].set_ylabel('Proportion')
+    ax[1].set_title(display_name +" " + 'YES-proportion', fontsize=14, fontweight='bold', y=1.04)
+    for i, v in enumerate(total_counts['conversion_rate']):
+        ax[1].text(i, v , f"({total_counts['conversion_rate'].iloc[i]:.2f})", ha='center', fontsize=10)
+
+    plt.tight_layout()
+    plt.subplots_adjust(hspace=0.3)
+    plt.show()
+
+    return total_counts, fig
+
