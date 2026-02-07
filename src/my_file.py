@@ -305,3 +305,33 @@ def plot_numeric_heatmap_bivariate_analysis(df=None, month_var=None, year_var=No
     plt.show()
 
     return fig, ax
+
+
+def plot_boxplot_yes_no_distribution(df=None, xcol=None, feature_name=None, fig=None, ax=None):
+    """Plot distribution of numeric feature by yes-no answer"""
+    if fig is None or ax is None:
+        fig, ax = plt.subplots(figsize=(8, 4))
+    sns.boxplot(data=df, x=xcol, y=feature_name, color='b',
+                medianprops={'ls':'-', 'lw':2.5, 'color':'r',
+                'marker': 'o', 'markersize':6,'markerfacecolor':'white', 'markeredgecolor':'k'})
+    
+    bbox_props = dict(boxstyle='round', edgecolor='k', facecolor='white', alpha=0.9)
+    median_no, median_yes = df.groupby([xcol])[feature_name].median()
+    plt.text(1.6, ax.get_ylim()[1], f"No Meidan = {median_no:.2f}\nYes Median = {median_yes:.2f}",
+            ha='left', va='center', fontsize=14, color='k', bbox=bbox_props)
+    
+    ax.set_title(f"Distribution of {feature_name} by {xcol}", fontsize=14, fontweight='bold', y=1.02)
+    plt.show()
+    return fig, ax
+
+
+# Compute Variance by year of numeric variable
+def var_by_year(df=None, seasonal_var=None, feature_var=None):
+    """Compute Variance by year of numeric variable"""
+    results = []
+    yearly_var = df.groupby([seasonal_var])[feature_var].var().round(2)
+    yearly_observ = round(df[seasonal_var].value_counts(normalize=True)*100, 1)
+    df = pd.concat([yearly_var, yearly_observ], axis='columns')    
+    df.columns = [f'variation of `{feature_var}`', 'Number of observatios(%)']
+
+    return df
