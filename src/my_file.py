@@ -60,8 +60,8 @@ def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10
 
     # Titles and labels 
     ax.set_title(f"{feature_var.capitalize()} YES-proportion", fontsize=16, fontweight='bold', y=1.02) 
-    ax.set_ylabel("Proportion")
-    ax.set_xlabel(f"{feature_var}_bins")
+    ax.set_ylabel("Proportion", fontsize=14)
+    ax.set_xlabel(f"{feature_var}_bins", fontsize=14)
 
     # Absoulute and relative counts
     abs_values = df_bins.groupby(['bin'])[ycol].count()
@@ -70,12 +70,17 @@ def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10
     # Format x-axis
     bin_type = 'int' if df[feature_var].dtype == 'int' else 'float'
     if bin_type == 'int':
-        x_labl = [f"({int(i.left)}...{int(i.right)}]\n-----\n{j} ({k}%)" 
-                  for i, j, k in zip(df_yes_prob['bin'], abs_values, rel_values)]
-    else:
-        x_labl = [f"({i.left}...{i.right}]\n-----\n{j} ({k}%)]" for i, j, k in zip(df_yes_prob['bin'], abs_values, rel_values)]
+        x_labl = [
+            f"({int(i.left)}...{int(i.right)}]\n-----\n{j} ({k}%)" 
+                  for i, j, k in zip(df_yes_prob['bin'], abs_values, rel_values)
+        ]
+    if bin_type == 'float':
+        x_labl = [
+            f"({i.left:.2f}...{i.right:.2f}]\n-----\n{j} ({k}%)" 
+            for i, j, k in zip(df_yes_prob['bin'], abs_values, rel_values)
+        ]
     
-    ax.set_xticklabels(x_labl)
+    ax.set_xticklabels(x_labl, fontsize=12)
 
     return df_yes_prob, fig, ax
 
