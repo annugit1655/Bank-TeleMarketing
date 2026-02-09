@@ -56,12 +56,13 @@ def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10
                  color='skyblue', ci=None, width=widths, ax=ax)
     # Annotate probablitites above bar
     for i, row in df_yes_prob.iterrows():
-        ax.text(i, row['mean']+0.02, f"{row['mean']:.2f}", ha='center', va='bottom', fontsize=10, color='k')
+        ax.text(i, row['mean']+0.02, f"{row['mean']:.2f}", ha='center', va='bottom', fontsize=14, fontweight='bold', color='k')
 
     # Titles and labels 
     ax.set_title(f"{feature_var.capitalize()} YES-proportion", fontsize=16, fontweight='bold', y=1.02) 
-    ax.set_ylabel("Proportion", fontsize=14)
-    ax.set_xlabel(f"{feature_var}_bins", fontsize=14)
+    ax.set_ylabel("Proportion", fontsize=14, fontweight='bold')
+    ax.set_yticklabels(ax.get_yticklabels(), fontsize=12, fontweight='bold')
+    ax.set_xlabel(f"{feature_var}_bins", fontsize=14, fontweight='bold')
 
     # Absoulute and relative counts
     abs_values = df_bins.groupby(['bin'])[ycol].count()
@@ -80,7 +81,7 @@ def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10
             for i, j, k in zip(df_yes_prob['bin'], abs_values, rel_values)
         ]
     
-    ax.set_xticklabels(x_labl, fontsize=12)
+    ax.set_xticklabels(x_labl, fontsize=12, fontweight='bold')
 
     return df_yes_prob, fig, ax
 
