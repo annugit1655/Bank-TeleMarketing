@@ -2,7 +2,8 @@ import src.my_library as my_library
 
 pd, np, plt, sns = my_library.make_inital_imports()
 
-from scipy.stats import stats
+from scipy.stats import stats, chi2_contingency
+
 
 def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10, widths=float, ax=None, fig=None):
     """"
@@ -220,22 +221,38 @@ def plot_cumsum_total_yes_response(df=None, feature_var=None, cumsum_total_var=N
 
 # Statistical test for relationship between categorical variables and y(term deposit)
 def chi_square_categorical_y(data, feature_var, target_var):
+    """
+    Perform Chi-square test between a categorical feature and target variable.
+    """
     # Contingency table
     table = pd.crosstab(data[feature_var], data[target_var])
 
     # Chi-square test
-    chi2, p, dof, expected = stats.chi2_contingency(table)
+    chi2, p, dof, expected = chi2_contingency(table)
 
     # Compute Cramér's V
     n = table.sum().sum()
     k = min(table.shape)
     cramers_v = np.sqrt(chi2 / (n * (k - 1)))
-    significance = 'small' if cramers_v < 0.1 else 'medium' if cramers_v < 0.3 else 'large' if cramers_v < 0.5 else 'very large'
-    df = pd.DataFrame(
-        [chi2, p, cramers_v, significance], index=['Chi-square', 'pvalue', 'cramers_v', 'effect_size'], columns=['statistical_values'])
 
-    df = df.round(4)
-    return df
+    # Interpret effect size
+    if cramers_v < 0.1:
+        significance = 'small'
+    elif cramers_v < 0.3:
+        significance = 'medium'
+    elif cramers_v < 0.5:
+        significance = 'large'
+    else:
+        significance = 'very large'
+
+    # Results DataFrame
+    result = pd.DataFrame(
+        [chi2, p, cramers_v, significance],
+        index=['Chi-square', 'pvalue', 'cramers_v', 'effect_size'],
+        columns=['statistical_values']
+    )
+
+    return result.round(4)
 
 
 def plot_odd_ratio_table(data, feature_var, target_var, baseline):
