@@ -358,3 +358,76 @@ def var_by_year(df=None, seasonal_var=None, feature_var=None):
     df.columns = [f'variation of `{feature_var}`', 'Number of observatios(%)']
 
     return df
+
+# Social-economic features
+def numeric_nature(df, numeric_var):
+    """Numeric features values"""
+    unique_values = df[numeric_var].nunique()
+    var_range = f"{df[numeric_var].min()}  to  {df[numeric_var].max()}"
+    values_count = df[numeric_var].value_counts()
+
+    return unique_values, var_range, values_count
+
+def numeric_var_by_year(df, xcol, ycol, hue_col, fig=None, ax=None):
+    """Plot numeric variable distribution by consecutive year"""
+    if fig is  None or ax is None:
+        fig, ax = plt.subplots(1, 2, figsize=(15, 5))
+    # numeic variable by seaonal_variable
+    sns.lineplot(data = df, x = xcol, y = ycol, hue=hue_col, palette='tab10', ax = ax[0])
+
+    ax[0].set_title(f"{ycol.replace("_", " ").capitalize()}  by {hue_col.capitalize()}", fontsize=16, fontweight='bold', y=1.10)
+    ax[0].set_xlabel(" ")
+    # unified legend
+    lines, labels = ax[0].get_legend_handles_labels()
+    fig.legend(lines, labels, bbox_to_anchor=(0.29, 0.9), loc='upper center', ncols=3, frameon=False)
+    ax[0].legend_.remove()
+    # Overall numeric variable plot
+    sns.lineplot(data=df, x=xcol, y=ycol, hue=None, ax=ax[1])
+    ax[1].set_xlabel(" ")
+    ax[1].set_title(f"Overall distribution of {ycol.replace("_", " ").capitalize()}", fontsize=16, fontweight='bold', y=1.02)
+    
+    plt.tight_layout()
+    plt.subplots_adjust(wspace=0.3, hspace=0.3)
+    plt.show()
+
+    return fig, ax
+
+
+def plot_num_var_yes_prop(df, feature_name, y_binary, fig=None, ax = None):
+    """"Social-economic features distribution along with YES-proportion of y"""
+    # Compute cumulative YES-proportion
+    cumulative_yes_proportion = np.cumsum(df[y_binary]) / np.arange(1, df.shape[0] + 1)
+
+    # Plot
+    if fig is None or ax is None:
+        fig, ax = plt.subplots(figsize=(12, 4))
+    ax2 = ax.twinx()
+
+    sns.lineplot(x=df.index, y=df[feature_name], color='b', ax=ax, label=feature_name, legend=False)
+    sns.lineplot(x=df.index, y=cumulative_yes_proportion, color='r', ax=ax2, label='Cumulative YES-proportion', legend=False)
+
+    # Styling
+    ax.set_ylabel(feature_name, color='b')
+    ax2.set_ylabel('YES-proportion', color='r')
+    ax.tick_params(axis='y', colors='b')
+    ax2.tick_params(axis='y', colors='r')
+    ax.set_xlabel(" ")
+    ax2.set_xlabel(" ")
+
+    # Mark years
+    year_indexes = [0, 27690, 39130]
+    year_labels = [2008, 2009, 2010]
+    for idx in year_indexes:
+        ax.axvline(x=idx, ls='--', c='grey')
+    ax.set_xticks(year_indexes, year_labels)
+
+    # Unified legend 
+    lines, labels = ax.get_legend_handles_labels() 
+    lines2, labels2 = ax2.get_legend_handles_labels() 
+    fig.legend(lines + lines2, labels + labels2, loc='upper center', bbox_to_anchor=(0.5, 0.95), ncol=2, frameon=False)
+    
+    fig.suptitle(f'{feature_name} vs YES-proportion entire dataset', fontsize=14, fontweight='bold', y=1.02)
+    plt.tight_layout()
+    plt.show()
+
+    return fig, ax
