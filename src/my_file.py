@@ -33,7 +33,7 @@ def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10
 
     # Create evenly spaced bins
     bins = np.linspace(df[feature_var].min(),
-                       df[feature_var].max(),
+                       df[feature_var].max()+1,
                        num=num_grp)
     
     # Assign each values to a bins
@@ -57,7 +57,7 @@ def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10
                  color='skyblue', ci=None, width=widths, ax=ax)
     # Annotate probablitites above bar
     for i, row in df_yes_prob.iterrows():
-        ax.text(i, row['mean']+0.02, f"{row['mean']:.2f}", ha='center', va='bottom', fontsize=14, fontweight='bold', color='k')
+        ax.text(i, row['mean']+0.01, f"{row['mean']:.2f}", ha='center', va='bottom', fontsize=14, fontweight='bold', color='k')
 
     # Titles and labels 
     ax.set_title(f"{feature_var.capitalize()} YES-proportion", fontsize=16, fontweight='bold', y=1.02) 
@@ -73,12 +73,12 @@ def plot_numeric_yes_proportion(df=None, feature_var=None, ycol=None, num_grp=10
     bin_type = 'int' if df[feature_var].dtype == 'int' else 'float'
     if bin_type == 'int':
         x_labl = [
-            f"({int(i.left)}...{int(i.right)}]\n-----\n{j} ({k}%)" 
+            f"[{int(i.left)}...{int(i.right)})\n-----\n{j} ({k}%)" 
                   for i, j, k in zip(df_yes_prob['bin'], abs_values, rel_values)
         ]
     if bin_type == 'float':
         x_labl = [
-            f"({i.left:.2f}...{i.right:.2f}]\n-----\n{j} ({k}%)" 
+            f"[{i.left:.2f}...{i.right:.2f})\n-----\n{j} ({k}%)" 
             for i, j, k in zip(df_yes_prob['bin'], abs_values, rel_values)
         ]
     
@@ -116,7 +116,7 @@ def plot_univariate_analysis_categorical_var(df=None, categorical_var=None, ycol
     total_counts = df.groupby([categorical_var])[ycol].value_counts().unstack().fillna(0)   
     total_counts['total'] = total_counts.sum(axis='columns')
     total_counts = total_counts.sort_values(by='total', ascending=False)
-    total_counts['conversion_rate'] = (total_counts['yes'] / total_counts['total']).round(2)
+    total_counts['conversion_rate'] = (total_counts['yes'] / total_counts['total']).round(3)
     total_counts = total_counts.assign(
         cumsum_total_proportion = lambda x: (x['total'].cumsum() / x['total'].sum())*100,
         cumsum_yes_proportion = lambda x: (x['yes'].cumsum() / x['yes'].sum())*100
@@ -142,7 +142,7 @@ def plot_univariate_analysis_categorical_var(df=None, categorical_var=None, ycol
     ax[1].set_ylabel('Proportion')
     ax[1].set_title(display_name +" " + 'YES-proportion', fontsize=14, fontweight='bold', y=1.04)
     for i, v in enumerate(total_counts['conversion_rate']):
-        ax[1].text(i, v , f"({total_counts['conversion_rate'].iloc[i]:.2f})", ha='center', fontsize=10)
+        ax[1].text(i, v , f"({total_counts['conversion_rate'].iloc[i]:.3f})", ha='center', fontsize=10)
 
     plt.tight_layout()
     plt.subplots_adjust(hspace=0.3)
