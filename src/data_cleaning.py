@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from IPython.display import display
 
 # numeric features distribution plots
 def univariate_numeric_distribution(df:pd.DataFrame, col:str):
@@ -19,7 +20,7 @@ def univariate_numeric_distribution(df:pd.DataFrame, col:str):
     plt.show()
     
 
-    # categorical features distribution plots
+# categorical features distribution plots
 def univariate_categorical_distribution(df: pd.DataFrame, col: str):
     fig, ax = plt.subplots(ncols=2, figsize=(20, 8))
 
