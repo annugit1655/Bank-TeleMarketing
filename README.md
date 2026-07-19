@@ -55,6 +55,7 @@ The `data/processed` folder contains:
 ---
 
 # Repository Structure
+'''
 Bank-Marketing-Analysis/
 
 │
@@ -85,7 +86,7 @@ Bank-Marketing-Analysis/
 ├── models/
 ├── requirements.txt
 └── README.md
-
+'''
 
 ---
 
