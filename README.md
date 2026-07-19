@@ -55,38 +55,6 @@ The `data/processed` folder contains:
 ---
 
 # Repository Structure
-'''
-Bank-Marketing-Analysis/
-
-│
-├── data/
-│ ├── raw/
-│ │ ├── bank-full.csv
-│ │ ├── bank.csv
-│ │ ├── bank-additional.csv
-│ │ ├── bank-additional-full.csv
-│ │ └── bank-names.txt
-│ │
-│ └── processed/
-│ ├── clean.csv
-│ └── funnel-data.csv
-│
-├── notebooks/
-│ ├── 01-data-cleaning-and-eda.ipynb
-│ ├── 02-bivariate-correlation-analysis.ipynb
-│ ├── 03-multivariate-analysis.ipynb
-│ └── 04-funnel-conversion-and-performance-analysis.ipynb
-│
-├── src/
-│ ├── data_cleaning.py
-│ ├── my_file.py
-│ └── my_library.py
-│
-├── images/
-├── models/
-├── requirements.txt
-└── README.md
-'''
 
 <details>
 <summary>Repository Structure</summary>
@@ -95,8 +63,16 @@ Bank-Marketing-Analysis/
 Bank-TeleMarketing/
 │
 ├── data/
-│   ├── raw/
-│   └── processed/
+│ |── raw/
+│ │ ├── bank-full.csv
+│ │ ├── bank.csv
+│ │ ├── bank-additional.csv
+│ │ ├── bank-additional-full.csv
+│ │ └── bank-names.txt
+| |
+│ │── processed/
+│   ├── clean.csv
+│   └── funnel-data.csv
 │
 ├── notebooks/
 │   ├── 01-data-cleaning-and-eda.ipynb
