@@ -88,6 +88,32 @@ Bank-Marketing-Analysis/
 └── README.md
 '''
 
+<details>
+<summary>Repository Structure</summary>
+
+```text
+Bank-TeleMarketing/
+│
+├── data/
+│   ├── raw/
+│   └── processed/
+│
+├── notebooks/
+│   ├── 01-data-cleaning-and-eda.ipynb
+│   ├── 02-bivariate-correlation-analysis.ipynb
+│   ├── 03-multivariate-analysis.ipynb
+│   └── 04-funnel-conversion-and-performance-analysis.ipynb
+│
+├── src/
+│   ├── data_cleaning.py
+│   ├── my_file.py
+│   └── my_library.py
+│
+├── images/
+├── models/
+├── requirements.txt
+└── README.md
+
 ---
 
 # Analysis Approach
