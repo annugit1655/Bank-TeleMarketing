@@ -127,12 +127,17 @@ The stages represent campaign characteristics and customer outcomes rather than 
 
 ## Primary Drop-off Insights
 
-***
-
 ### Drop-off 1 — Stage 1 to Stage 2 (35.2% Reduction)
 - 13,020 customers were contacted via an __unknown channel__, with only a __4.1%__ conversion rate.
 - Cellular contact achieved a **14.9%** conversion rate versus **4.1%** for the unknown channel (3.6× higher).
 - Switching entirely to cellular outreach for these customers could have resulted in approximately 1,400 additional subscriptions.
+
+### Drop-off 2 — Stage 2 to Stage 3 (71.8% Reduction) — Largest Drop-off
+- **21,028 customers decline** — single largest drop-off in the funnel.
+- 81.7% of customers had no prior relationship with the bank.
+- New customers converted at **9.2%**, vs customers with a previously successful campaign outcome converted at **64.7%**(~ 7 times higher).
+
+
 
 # Analysis Highlights
 
