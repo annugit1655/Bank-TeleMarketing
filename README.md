@@ -137,6 +137,10 @@ The stages represent campaign characteristics and customer outcomes rather than 
 - 81.7% of customers had no prior relationship with the bank.
 - New customers converted at **9.2%**, vs customers with a previously successful campaign outcome converted at **64.7%**(~ 7 times higher).
 
+### Drop-off 3 — Stage 3 to Stage 4 (35.9% Reduction)
+- Customers called __6+ times__ convert at only __5.8%__ vs __14.6%__ for a single call.
+- Excessive calling reduces customer conversion rates.
+- Customer fatigue from repeated calls is a key factor contributing to drop-off at this final stage.
 
 
 # Analysis Highlights
