@@ -54,44 +54,6 @@ The `data/processed` folder contains:
 
 ---
 
-# Repository Structure
-
-<details>
-<summary>Repository Structure</summary>
-
-```text
-Bank-TeleMarketing/
-│
-├── data/
-│ |── raw/
-│ │ ├── bank-full.csv
-│ │ ├── bank.csv
-│ │ ├── bank-additional.csv
-│ │ ├── bank-additional-full.csv
-│ │ └── bank-names.txt
-| |
-│ │── processed/
-│   ├── clean.csv
-│   └── funnel-data.csv
-│
-├── notebooks/
-│   ├── 01-data-cleaning-and-eda.ipynb
-│   ├── 02-bivariate-correlation-analysis.ipynb
-│   ├── 03-multivariate-analysis.ipynb
-│   └── 04-funnel-conversion-and-performance-analysis.ipynb
-│
-├── src/
-│   ├── data_cleaning.py
-│   ├── my_file.py
-│   └── my_library.py
-│
-├── images/
-├── models/
-├── requirements.txt
-└── README.md
-
----
-
 # Analysis Approach
 
 ## 1. Data Cleaning & Exploratory Data Analysis
@@ -156,12 +118,21 @@ The stages represent campaign characteristics and customer outcomes rather than 
 
 | Analytical Funnel Stage | Customers | % of Total |
 |---|---:|---:|
-| Total Customers | 45,211 | 100.0% |
-| Customers Contacted via Cellular | 29,285 | 64.8% |
-| Customers with Previous Contact History | 8,257 | 18.3% |
-| Customers Who Subscribed | 5,289 | 11.7% |
+| Stage 1 — Total Customers | 45,211 | 100.0% |
+| Stage 2 — Customers Contacted via Cellular | 29,285 | 64.8% |
+| Stage 3 — Customers with Previous Contact History | 8,257 | 18.3% |
+| Stage 4 — Customers Who Subscribed | 5,289 | 11.7% |
 
 ---
+
+## Primary Drop-off Insights
+
+***
+
+### Drop-off 1 — Stage 1 to Stage 2 (35.2% Reduction)
+- 13,020 customers were contacted via an __unknown channel__, with only a __4.1%__ conversion rate.
+- Cellular contact achieved a **14.9%** conversion rate versus **4.1%** for the unknown channel (3.6× higher).
+- Switching entirely to cellular outreach for these customers could have resulted in approximately 1,400 additional subscriptions.
 
 # Analysis Highlights
 
@@ -214,5 +185,42 @@ Based on the analysis:
 
 ---
 
+# Repository Structure
+
+<details>
+<summary>Repository Structure</summary>
+
+```text
+Bank-TeleMarketing/
+│
+├── data/
+│ |── raw/
+│ │ ├── bank-full.csv
+│ │ ├── bank.csv
+│ │ ├── bank-additional.csv
+│ │ ├── bank-additional-full.csv
+│ │ └── bank-names.txt
+| |
+│ │── processed/
+│   ├── clean.csv
+│   └── funnel-data.csv
+│
+├── notebooks/
+│   ├── 01-data-cleaning-and-eda.ipynb
+│   ├── 02-bivariate-correlation-analysis.ipynb
+│   ├── 03-multivariate-analysis.ipynb
+│   └── 04-funnel-conversion-and-performance-analysis.ipynb
+│
+├── src/
+│   ├── data_cleaning.py
+│   ├── my_file.py
+│   └── my_library.py
+│
+├── images/
+├── models/
+├── requirements.txt
+└── README.md
+
+---
 
 
