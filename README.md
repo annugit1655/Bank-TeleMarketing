@@ -142,6 +142,18 @@ The stages represent campaign characteristics and customer outcomes rather than 
 - Excessive calling reduces customer conversion rates.
 - Customer fatigue from repeated calls is a key factor contributing to drop-off at this final stage.
 
+### Baseline ROI vs Improved ROI
+| Metric | Baseline Campaign | Improved Campaign |
+|--------|------------------:|------------------:|
+| Total Customers Contacted | 45,211 | 45,211 |
+| Successful Subscriptions | 5,289 | 6,689 |
+| Conversion Rate | 11.7% | 14.8% |
+| Revenue per Subscription | $1,000 | $1,000 |
+| Total Revenue | $5,289,000 | $6,689,000 |
+| Campaign Cost (@ $5/contact) | $226,055 | $226,055 |
+| Net Profit | $5,062,945 | $6,462,945 |
+| ROI | 2,239.7% | 2,859.0% |
+| ROI Improvement | — | +619.3 percentage points |
 
 # Analysis Highlights
 
