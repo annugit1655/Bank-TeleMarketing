@@ -193,6 +193,14 @@ Based on the analysis:
 
 ---
 
+# Handling Imbalanced Data
+To address class imbalance, we employed several techniques:
+
+- **SMOTE Analysis ---- OVERSAMPLING APPROACH :**We duplicated the minority class observations in the training dataset to balance it with the majority class.
+- **Class Weights :** We assigned higher weights to the minority class during model training.
+- **Threshold Tuning :** The probability threshold for determining crisp labels was fine-tuned, rather than using the default threshold of 0.5.
+- **Cost-Sensitive Optimization :** The algorithm tests different thresholds and picks the one that minimizes total business cost, not statistical performance. It reflects real-world decisions where business impact matters more than academic metrics.
+
 # Technologies Used
 
 - Python
