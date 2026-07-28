@@ -201,6 +201,17 @@ To address class imbalance, we employed several techniques:
 - **Threshold Tuning :** The probability threshold for determining crisp labels was fine-tuned, rather than using the default threshold of 0.5.
 - **Cost-Sensitive Optimization :** The algorithm tests different thresholds and picks the one that minimizes total business cost, not statistical performance. It reflects real-world decisions where business impact matters more than academic metrics.
 
+**Impact on Conversion Rate :**
+| Approach | Misses Suscriptions | Lost Revenue | Wasted Marketing | Marketing Cost | Total Cost | Subscribers Found | Detection Rate |
+|-------|-------|-------|-------|-------|-------|-------|-------|
+| Baseline  | 568  | $113,600  | 254  | $2,540  | $116,140  | 490  | 46.3%  |
+| SMOTE  | 376  | $75,200  | 529  | $5,290  | $80,490  | 682  | 64.5%  |
+| Class Weighted  | 138  | $27,600  | 1,158  | $11,580  | $39,180  | 920  | 87.0%  |
+| Threshold Tuned  | 251  | $50,200  | 672  | $6,720  | $56,920  | 807  | 76.3%  |
+| Cost-Optimized | 58      |  $11,600      | 1,897     | $18,970      | $30,570      |   1,000     |   94.5%    |
+
+This table illustrate why business-focused optimization outperforms statistical metrics - the approach with the lowest F1-score (Cost-Optimized) delivers the best business outcome by understanding the true cost structure.
+
 # Technologies Used
 
 - Python
