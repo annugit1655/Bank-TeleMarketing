@@ -38,7 +38,7 @@ def expected_calibration_error(y_true: np.asarray,
                 Expected Calibration Error
     """
 
-    ece = 0
+    ece = 0.0
 
     y_true = np.asarray(y_true)
     y_prob = np.asarray(y_prob)
@@ -60,19 +60,19 @@ def expected_calibration_error(y_true: np.asarray,
         else:
             in_bin = (y_prob >= bin_lower) & (y_prob < bin_upper)
 
-    # prop_in_bin = in_bin.sum()/len(in_bin) = in_bin.mean()
-    prop_in_bin = in_bin.mean()
+        # prop_in_bin = in_bin.sum()/len(in_bin) = in_bin.mean()
+        prop_in_bin = in_bin.mean()
 
-    if prop_in_bin > 0:
-        accuracy_in_bin = y_true[in_bin].mean()
-        avg_confidence_in_bin = y_prob[in_bin].mean()
-        ece += np.abs(accuracy_in_bin - avg_confidence_in_bin) * prop_in_bin
+        if prop_in_bin > 0:
+            accuracy_in_bin = y_true[in_bin].mean()
+            avg_confidence_in_bin = y_prob[in_bin].mean()
+            ece += abs(accuracy_in_bin - avg_confidence_in_bin) * prop_in_bin
 
-    return ece
+    return float(ece)
 
 
-def maximum_calibration_error(y_true: np.asarray,
-                               y_prob: np.asarray,
+def maximum_calibration_error(y_true: np.ndarray,
+                               y_prob: np.ndarray,
                                n_bins: int=10,
                                strategy: str = 'uniform') -> float:
 
@@ -83,9 +83,9 @@ def maximum_calibration_error(y_true: np.asarray,
 
     Parameters:
     ------------
-    y_true: np.asarray
+    y_true: np.ndarray
             True Label (0 or 1)
-    y_prob: np.asarray
+    y_prob: np.ndarray
             Predicted Probabilities
     n_bins: int, default = 10
             Number of bins for grouping predictions
@@ -99,10 +99,10 @@ def maximum_calibration_error(y_true: np.asarray,
                 Maximum calibration error
     """
 
-    mce = 0
+    mce = 0.0
 
-    y_true = np.asarray(y_true)
-    y_prob = np.asarray(y_prob)
+    y_true = np.ndarray(y_true)
+    y_prob = np.ndarray(y_prob)
     
 
     if strategy == 'uniform':
@@ -121,12 +121,13 @@ def maximum_calibration_error(y_true: np.asarray,
         else:
             in_bin = (y_prob >= bin_lower) & (y_prob < bin_upper)
 
-    if in_bin.sum() > 0:
-        accuracy_in_bin = y_true[in_bin].mean()
-        avg_confidence_in_bin = y_prob[in_bin].mean()
-        mce = max(mce, np.abs(accuracy_in_bin, avg_confidence_in_bin))
+        if in_bin.sum() > 0:
+            accuracy_in_bin = y_true[in_bin].mean()
+            avg_confidence_in_bin = y_prob[in_bin].mean()
+            error = abs(accuracy_in_bin - avg_confidence_in_bin)
+            mce = max(mce, error)
 
-    return mce
+    return float(mce)
 
 
 def reliability_score(y_true: np.ndarray,
