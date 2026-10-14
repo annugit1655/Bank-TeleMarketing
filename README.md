@@ -3,8 +3,16 @@
 ## **Turning Banking Campaign Data into Actionable Customer Insights**
 An end-to-end machine learning project built on the Bank Telemarketing dataset to analyze customer behavior, campaign drivers, evaluate telemarketing campaign effectiveness, and predict whether a customer will subscribe to a bank term deposit.
 
-# Key Highlights
-do the markdown table
+# Key Highlights & Business Insights
+
+| Analysis | Key Highlights | Business Impact |
+|---|---|---|
+| [Ideal Customer Profile](notebooks/02-Campaign-Drivers-and-Correlation-Analysis.ipynb) · [Customer Volume](notebooks/03-Campaign-Impact-Analysis.ipynb) | **Job:** blue-collar worker is the most common; students show the highest conversion rates(29%).  <br>**Age:** Clients (35–49) age bracket are the most common, while older (>60) clients are more likely to subscribe at 34%.<br>**Marital Status:** Married clients form the largest group, but single clients show higher conversion rates. | Target customer segments based on observed subscription rates rather than contact volume alone. |
+| [Campaign Strategy Insights](notebooks/02-Campaign-Drivers-and-Correlation-Analysis.ipynb) | **Call Duration:** Calls exceeding 5 minutes show the highest conversion rates.<br> **Timing:** March, September, and December perform best; May performs worst.<br> **Past Success:** Previously successful customers convert at 7.1× the rate of others.<br> **Contact Frequency:** Conversion rates decline after three contacts. | Optimize campaign timing & execution, prioritize previously successful customers, and reduce repeated contacts to improve conversion rates. |
+| [Customer Financial Profile](notebooks/02-Campaign-Drivers-and-Correlation-Analysis.ipynb) | **Account Balance:** Customers with balances above 2K show higher subscription rates.<br>**Loan Status:** Customers without personal or housing loans are more likely to subscribe.<br>**Credit Default:** 98.2% of clients have no credit in default, indicating a predominantly non-defaulting customer base. | Prioritize financially stronger customer segments to improve targeting and subscription potential. |
+| [Funnel Conversion & Performance Insights](notebooks/04-funnel-conversion-and-performance-analysis.ipynb) | Modeled an increase in subscriptions from 5,289 to 6,689 under assumed revenue and cost conditions. | Estimate the potential returns from improved campaign conversion and resource allocation. |
+
+
 
 ## Project Objectives
 
@@ -38,61 +46,6 @@ The dataset is sourced from the UCI Bank Marketing dataset.
 | Features | 16 customer and campaign attributes |
 | Target Variable | `y` (term deposit subscription) |
 
-# Analysis Approach
-
-## 1. Data Cleaning & Exploratory Data Analysis
-
-Notebook:
-
-`01-data-cleaning-and-eda.ipynb`
-
-Performed:
-
-- Data quality checks
-- Missing value analysis
-- Duplicate detection
-- Feature understanding
-- Target variable analysis
-- Customer profile exploration
-
----
-
-## 2. Bivariate & Correlation Analysis
-
-Notebook:
-
-`02-bivariate-correlation-analysis.ipynb`
-
-Focus:
-
-- Relationship between individual features and subscription outcome
-- Conversion rate comparison across customer groups
-- Numerical feature correlation analysis
-- Identification of important customer characteristics
-
----
-
-## 3. Multivariate Analysis
-
-Notebook:
-
-`03-multivariate-analysis.ipynb`
-
-Objective:
-
-The analysis focuses on understanding how multiple customer characteristics and campaign attributes influence term deposit subscription likelihood.
-
-Key questions:
-
-- What type of customers are targeted by the bank?
-- Which customer profiles are more likely to subscribe?
-- Does communication channel influence campaign success?
-
----
-
-## 4. Funnel Conversion Analysis
-
-Notebook:
 
 `04-funnel-conversion-and-performance-analysis.ipynb`
 

@@ -1,0 +1,16 @@
+Classifiers,Calibration Method,ECE,Brier,AUC
+LogisticRegression,Uncalibrated,0.181895,0.117478,0.910453
+LogisticRegression,Sigmoid,0.029173,0.07079,0.910469
+LogisticRegression,Isotonic,0.004627,0.068432,0.91033
+RandomForest,Uncalibrated,0.238477,0.13205,0.911757
+RandomForest,Sigmoid,0.00994,0.068704,0.911826
+RandomForest,Isotonic,0.006474,0.068551,0.911933
+SVM,Uncalibrated,0.00942,0.065245,0.925599
+SVM,Sigmoid,0.009423,0.064984,0.925922
+SVM,Isotonic,0.006856,0.064724,0.925807
+KNN,Uncalibrated,0.036812,0.076927,0.833633
+KNN,Sigmoid,0.033633,0.075206,0.858979
+KNN,Isotonic,0.012477,0.073142,0.858794
+XGBoost,Uncalibrated,0.022983,0.064753,0.930172
+XGBoost,Sigmoid,0.034885,0.065182,0.936169
+XGBoost,Isotonic,0.009069,0.061239,0.935787
