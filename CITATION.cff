@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+title: "From Cold Calls to Conversions: An End-to-End Bank Telemarketing ML Project"
+message: "If you use this project in your research, publication, or educational work, please cite it using the metadata below."
+type: software
+
+authors:
+  - family-names: "Yadav"
+    given-names: "Annu"
+    affiliation: "Data Scientist"
+
+repository-code: "https://github.com/annugit1655/Bank-TeleMarketing"
+
+license: "MIT"
+
+abstract: >
+  An end-to-end data analytics and machine learning project focused on understanding customer behavior, 
+  evaluating telemarketing campaign performance, predicting term-deposit subscriptions, 
+  and identifying opportunities to improve customer acquisition efficiency and campaign ROI.
+
+keywords:
+  - Data Science
+  - Machine Learning
+  - Python
+  - Data Analysis
+  - Portfolio
+  - Exploratory Data Analysis (EDA)
+  - Campaign Driver & Correlation Analysis
+  - Campaign Effectiveness Analysis
+  - Conversion Funnel & Performance Analytics
+  - Customer Acquisition Cost (CAC) Analysis
+  - Predictive Machine Learning
+  - Hyperparameter Optimization
+  - SHAP Model Explainability
+  - Decile, Gain, Lift & ROI Analysis
+  
+
+date-released: "2026-10-30"
+
+preferred-citation:
+  type: software
+  authors:
+    - family-names: "Yadav"
+      given-names: "Annu"
+  title: "From Cold Calls to Conversions: An End-to-End Bank Telemarketing ML Project"
+  year: 2026
+  url: "https://github.com/annugit1655/Bank-TeleMarketing"
