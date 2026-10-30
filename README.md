@@ -1,7 +1,15 @@
-# 📊 From Cold Calls to Conversions: An End-to-End Bank Telemarketing ML Project
+# 📊 **From Cold Calls to Conversions**
+## __An End-to-End Bank Telemarketing Analytics & ML Project__
+
+Customer Intelligence • Predictive Modeling • Campaign Optimization • ROI Analysis
+
+![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white) ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-LATEST-F7931E?logo=scikitlearn&logoColor=white) ![Modeling](https://img.shields.io/badge/Modeling-XGBoost-2E8B57) ![Model Calibration](https://img.shields.io/badge/Model_Calibration-Isotonic-yellow?logo=checkmarx&logoColor=white) ![Explainability](https://img.shields.io/badge/Explainability-SHAP-8A2BE2)
+
+![License: MIT](https://img.shields.io/badge/License-MIT-98FB98.svg) ![Stars](https://img.shields.io/badge/Stars-0-lightgrey?logo=github) ![Forks](https://img.shields.io/badge/Forks-0-lightgrey?logo=git) ![Repo Size](https://img.shields.io/badge/Repo%20Size-247.82%20MiB-blue)
 
 ## **Turning Banking Campaign Data into Actionable Customer Insights**
 An end-to-end machine learning project built on the Bank Telemarketing dataset to analyze customer behavior, campaign drivers, evaluate telemarketing campaign effectiveness, and predict whether a customer will subscribe to a bank term deposit.
+
 
 # Key Highlights & Business Insights
 
@@ -130,7 +138,7 @@ Based on the analysis:
 
 ---
 
-# Handling Imbalanced Data
+## __Customer Acquisition Cost (CAC) Analysis__
 To address class imbalance, we employed several techniques:
 
 - **SMOTE Analysis — OVERSAMPLING APPROACH :** We duplicated the minority class observations in the training dataset to balance it with the majority class.
@@ -149,18 +157,85 @@ To address class imbalance, we employed several techniques:
 
 This table illustrate why business-focused optimization outperforms statistical metrics - the approach with the lowest F1-score (Cost-Optimized) delivers the best business outcome by understanding the true cost structure.
 
-# 🛠️ Tech Stack
-| Category | Technologies |
-|---|---|
-| 🐍 Programming Language | Python |
-| 📊 Data Manipulation | Pandas, NumPy |
-| 🤖 Machine Learning | Scikit-learn |
-| 📈 Data Visualization | Matplotlib, Seaborn |
-| 📐 Statistical Analysis | SciPy |
-| 💻 IDEs & Development Environments | Jupyter Notebook, Visual Studio Code (VS Code) |
-| 🔧 Version Control | Git |
-| 🌐 Code Hosting | GitHub |
 
+## 🛠️ **Tech Stack**
+
+| Category | Technologies |
+|:---|---:|
+| Programming Language | Python |
+| Data Analysis | Pandas, NumPy |
+| IDEs & Development Environments | Jupyter Notebook, Visual Studio Code (VS Code) |
+| Visualization | Matplotlib, Seaborn |
+| Dimensionality Reduction | PCA, MDS |
+| Statistical Analysis | Statsmodels, Scipy |
+| Text Visualization | WordCloud |
+| Clustering Visualization | Dendrogram |
+| Machine Learning | Scikit-learn |
+| Best Model | XGBoost |
+| Calibration | Isotonic |
+| Model Explainability | SHAP |
+| Hyperparameter Tuning | GridSearchCV |
+| Web Application | Streamlit |
+| Version Control | Git, GitHub |
+
+---
+## **Getting Started**
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/annugit1655/Bank-TeleMarketing.git
+```
+
+### 2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Train the model (Optional)
+A trained model is already included.
+
+To retrain from scratch, open:
+```bash
+run all notebooks 01-09
+```
+
+---
+## 🚀 **Future Improvements**
+
+- 🧪Campaign A/B testing.
+- ☁️ Deploy on Streamlit Cloud or AWS.
+- 📈 Automate model retraining.
+- ⚙️ Build an end-to-end MLOps pipeline.
+
+---
+## ⭐ Support
+If you found this project useful, consider giving it a ⭐ Star on GitHub. It helps others discover the project and supports future improvements.
+
+### 📚 Citation
+If you use this project in academic research, publications, educational materials, or derivative works, please cite it and provide appropriate credit to the original author.
+
+This repository includes a [CITATION.cff](#https://github.com/annugit1655/Bank-TeleMarketing/blob/main/CITATION.cff) file, so GitHub provides a "**Cite this repository**" button in the repository sidebar. You can use it to obtain citations in BibTeX, APA, and other supported formats.
+
+Yadav, Annu. (2026). Real Estate Price Prediction (Version 1.0) [Software]. GitHub.
+
+```bash
+https://github.com/annugit1655/Bank-TeleMarketing
+```
+Author: Yadav Annu
+
+GitHub: https://github.com/annugit1655
+
+Contact: ayannu1655@gmail.com
+
+If you build upon this work, attribution is appreciated and helps others discover the original project.
+
+Note: The MIT License requires that the original copyright notice be retained in copies of the Software.
+
+📜 License
+
+© 2026 Yadav Annu.
+
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/annugit1655/Bank-TeleMarketing/blob/main/LICENSE) file for details.
 
 
 
