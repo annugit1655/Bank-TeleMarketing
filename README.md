@@ -1,7 +1,9 @@
-# 📊 **From Cold Calls to Conversions**
-## __An End-to-End Bank Telemarketing Analytics & ML Project__
+# 📊 **From Cold Calls to Conversions: Bank Telemarketing Campaign Optimization**
+## __End-to-End Marketing Analytics, Customer Acquisition Cost Analysis & Machine Learning System__
 
 Customer Intelligence • Predictive Modeling • Campaign Optimization • ROI Analysis
+
+![Bank-Telemarketing-Campaign-banner-image](images/Bank_Telemarketing_Professional_Banner.png)
 
 ![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white) ![Scikit-learn](https://img.shields.io/badge/Scikit--learn-LATEST-F7931E?logo=scikitlearn&logoColor=white) ![Modeling](https://img.shields.io/badge/Modeling-XGBoost-2E8B57) ![Model Calibration](https://img.shields.io/badge/Model_Calibration-Isotonic-yellow?logo=checkmarx&logoColor=white) ![Explainability](https://img.shields.io/badge/Explainability-SHAP-8A2BE2)
 
