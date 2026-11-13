@@ -32,5 +32,6 @@ XGBoost Isotonic,"CalibratedClassifierCV(cv=5, ensemble=True,
                                                                 multi_strategy=None,
                                                                 n_estimators=None,
                                                                 n_jobs=None,
-                                                                num_parallel_tree=None, ...))]),
-                       method='isotonic')","{'estimator__model__colsample_bytree': 1.0, 'estimator__model__gamma': 1.5, 'estimator__model__max_depth': 5, 'estimator__model__min_child_weight': 10, 'estimator__model__subsample': 1.0}",0.9361357566274597,14550.765870332718
+                                                                num_parallel_tree=None,
+                                                                random_state=42, ...))]),
+                       method='isotonic')","{'estimator__model__colsample_bytree': 1.0, 'estimator__model__gamma': 1.5, 'estimator__model__max_depth': 5, 'estimator__model__min_child_weight': 10, 'estimator__model__subsample': 1.0}",0.9361357566274597,14408.032833099365
